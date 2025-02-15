@@ -1,14 +1,8 @@
-Project Name : Phonebook
-    Description : By using this file we can save contacts and do these operations in it.
-        1) view all contacts.
-        2) add a contact.
-        3) remove a contact.
-        4) search details of any contact number.
-        5) update details of any contact.
-        6) delete whole phonebook (delete all contacts present in phonebook).
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+
 struct person
 {
     char name[30];
@@ -17,8 +11,10 @@ struct person
     char sex[8];
     char mail[100];
 };
+
 // Defining person data type.
 typedef struct person person;
+
 // All function declaration.
 void start();
 void remove_all();
@@ -29,12 +25,15 @@ void search_person();
 void remove_person();
 void update_person();
 void take_input(person *p);
+
+
 // Program starts here.
 int main()
 {
     start();
     return 0;
 }
+
 // This function will start our program.
 void start()
 {
@@ -84,10 +83,11 @@ void start()
         }
     }
 }
+
 // This will print main menu.
 void print_menu()
 {
-    system("clear");
+    system("cls");
     printf("\t\t****************************************************************\n");
     printf("\t\t*                  Welcome TO My phone book                    *\n");
     printf("\t\t****************************************************************\n\n");
@@ -98,8 +98,10 @@ void print_menu()
     printf("\t\t\t5) Update person\n\n");
     printf("\t\t\t6) Delete all contacts\n\n");
     printf("\t\t\t7) exit Phonebook\n\n\n");
+
     printf("\t\t\t\tEnter your Choice : ");
 }
+
 // This function will add contact into phonebook.
 void add_person()
 {
@@ -122,8 +124,10 @@ void add_person()
         system("clear");
         printf("Record added Successfully\n");
         printf("Press any key to continue ....\n");
+
     }
 }
+
 // By this we take contact information.
 void take_input(person *p)
 {
@@ -134,17 +138,20 @@ void take_input(person *p)
     printf("Enter name : ");
     // Here we are using scanset '^' - >  until get
     scanf("%[^\n]s",p->name);
+
     printf("Enter country code : ");
     scanf("%s",p->country_code); 
-    
+
     printf("Enter mobile no : ");
     scanf("%ld",&p->mble_no); 
+
     printf("Enter sex : ");
     scanf("%s",p->sex); 
-    
+
     printf("Enter email : ");
     scanf("%s",p->mail); 
 }
+
 // This function will list contact available in phonebook.
 void list_record()
 {
@@ -175,12 +182,16 @@ void list_record()
             int len4 = 21 - strlen(p.sex);
             printf("%s",p.name);
             for(i=0;i<len1;i++) printf(" ");
+
             printf("%s",p.country_code);
             for(i=0;i<len2;i++) printf(" ");
+
             printf("%ld",p.mble_no);
             for(i=0;i<len3;i++) printf(" ");
+
             printf("%s",p.sex);
             for(i=0;i<len4;i++) printf(" ");
+
             printf("%s",p.mail);
             printf("\n");
             fflush(stdin);
@@ -188,9 +199,10 @@ void list_record()
         fflush(stdin);
         fclose(fp);
         printf("\n\nPress any key to continue....\n");
-        
+
     }
 }
+
 // This function will search contact in phonebook.
 void search_person()
 {
@@ -198,6 +210,7 @@ void search_person()
     long int phone;
     printf("Enter Phone number of the person you want to search : ");
     scanf("%ld",&phone);
+
     FILE *fp;
     fp = fopen("phonebook_db", "rb");
     if (fp == NULL)
@@ -223,14 +236,19 @@ void search_person()
                 int len4 = 21 - strlen(p.sex);
                 printf("%s",p.name);
                 for(i=0;i<len1;i++) printf(" ");
+
                 printf("%s",p.country_code);
                 for(i=0;i<len2;i++) printf(" ");
+
                 printf("%ld",p.mble_no);
                 for(i=0;i<len3;i++) printf(" ");
+
                 printf("%s",p.sex);
                 for(i=0;i<len4;i++) printf(" ");
+
                 printf("%s",p.mail);
                 printf("\n");
+
                 flag = 1;
                 break;
             }
@@ -246,7 +264,9 @@ void search_person()
         fclose(fp);
         printf("\n\nPress any key to continue....\n");
     }
+
 }
+
 // This function will remove contact from phonebook.
 void remove_person()
 {
@@ -254,6 +274,7 @@ void remove_person()
     long int phone;
     printf("Enter Phone number of the person you want to remove from phonebook : ");
     scanf("%ld",&phone);
+
     FILE *fp,*temp;
     fp = fopen("phonebook_db", "rb");
     temp = fopen("temp","wb+");
@@ -289,16 +310,20 @@ void remove_person()
         rename("temp","phonebook_db");
         fflush(stdin);
         printf("Press any key to continue....\n");
-        
+
     }
+
 }
+
 // This function will update contact information.
 void update_person()
 {
+
     system("clear");
     long int phone;
     printf("Enter Phone number of the person you want to update details : ");
     scanf("%ld",&phone);
+
     FILE *fp,*temp;
     fp = fopen("phonebook_db", "rb");
     temp = fopen("temp","wb+");
@@ -338,6 +363,8 @@ void update_person()
         printf("Press any key to continue....\n");
     }
 }
+
+
 // This function will clear all the data of phonebook.
 void remove_all()
 {
